@@ -4,6 +4,9 @@
 - Add `bootstrap-margin-grid.css` to your project and use classes.
 - Or add `bootstrap-margin-grid.scss` to your project and generate columns based on simple fractions on-the-fly.
 
+### Bower
+- `bower i bootstrap-margin-grid`
+
 ### Usage
 Works with same markup as Bootstrap:
 
