@@ -1,0 +1,23 @@
+{
+  "name": "bootstrap-margin-grid",
+  "description": "Bootstrap's grid with margins.",
+  "main": "dist/bootstrap-margin-grid.min.css",
+  "authors": [
+    "Cory Simmons"
+  ],
+  "license": "MIT",
+  "keywords": [
+    "bootstrap",
+    "grid",
+    "margin"
+  ],
+  "homepage": "https://github.com/corysimmons/bootstrap-margin-grid",
+  "moduleType": [],
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "test",
+    "tests"
+  ]
+}
