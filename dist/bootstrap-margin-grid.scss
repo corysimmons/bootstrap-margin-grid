@@ -1,38 +1,39 @@
-$gutter: 30px;
+// Settings
+$grid-columns: 12 !default;
+$grid-gutter-width: 30px !default;
 
+$grid-breakpoints: (
+  // Extra small screen / phone
+  xs: 0,
+  // Small screen / phone
+  sm: 544px,
+  // Medium screen / tablet
+  md: 768px,
+  // Large screen / desktop
+  lg: 992px,
+  // Extra large screen / wide desktop
+  xl: 1200px
+) !default;
+
+// The Machine
 body {
   overflow-x: hidden;
 }
 
-@mixin container($padding: $gutter, $max-width: 960px) {
-  max-width: $max-width;
-  margin: auto;
+@mixin container($max-width: 0, $padding: $grid-gutter-width) {
+  @if $max-width != 0 {
+    max-width: $max-width;
+  }
+  margin-left: auto;
+  margin-right: auto;
   padding-left: $padding;
   padding-right: $padding;
 }
 
-.container {
-  @include container();
-}
-
-@mixin row($gutter: $gutter) {
+@mixin row($gutter: $grid-gutter-width) {
   position: relative;
   margin-left: -($gutter / 2);
   margin-right: -($gutter / 2);
-
-  &:before {
-    content: '';
-    position: absolute;
-    z-index: -1;
-    display: block;    
-    width: calc(100% - #{$gutter});
-    height: 100%;
-    top: 0;
-    right: 0;
-    bottom: 0;
-    left: 0;
-    margin: auto;
-  }
 
   &:after {
     content: '';
@@ -47,26 +48,46 @@ body {
   }
 }
 
-.row {
-  @include row();
-}
-
-@function get-width($numerator: 1, $denominator: 1, $gutter: $gutter) {
+@function get-width($numerator: 1, $denominator: 1, $gutter: $grid-gutter-width) {
   @if ($numerator == 1 and $denominator == 1) {
     @return 100%;
   } @else {
     $fraction: #{$numerator}/#{$denominator};
-    @return calc(100% * #{$fraction} - #{$gutter});
+    @return calc(99.99% * #{$fraction} - #{$gutter});
   }
 }
 
-@mixin column($numerator: 1, $denominator: 1, $gutter: $gutter) {
+@mixin column($numerator: 1, $denominator: 1, $gutter: $grid-gutter-width) {
   width: get-width($numerator, $denominator, $gutter);
 }
 
 // Generate classes
-@for $i from 1 through 12 {
-  .col-#{$i} {
-    @include column(#{$i}, 12);
+@each $breakpoint-key, $breakpoint-val in $grid-breakpoints {
+  @if $breakpoint-key == 'xl' {
+    .container {
+      @include container($breakpoint-val);
+    }
+  }
+}
+
+.row {
+  @include row();
+}
+
+@each $breakpoint-key, $breakpoint-val in $grid-breakpoints {
+  @if $breakpoint-val != 0 {
+    @media (min-width: $breakpoint-val) {
+      @for $i from 1 through $grid-columns {
+        .col-#{$breakpoint-key}-#{$i} {
+          @include column(#{$i}, $grid-columns);
+        }
+      }
+    }
+  } @else {
+    @for $i from 1 through $grid-columns {
+      .col-#{$breakpoint-key}-#{$i} {
+        @include column(#{$i}, $grid-columns);
+      }
+    }
   }
 }

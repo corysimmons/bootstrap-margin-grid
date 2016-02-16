@@ -19,19 +19,11 @@ Works with same markup as Bootstrap:
 
 ...except it produces margins instead of padding.
 
-Want background color on rows?
-
-```css
-.my-row:before {
-  background: tomato;
-}
-```
-
-Don't want to use `:before` trickery? Wrap your row in a superfluous element and apply bg color to it.
+Want background color on rows? Wrap your row in an element and apply bg color to it. This sucks but is still better than nesting a superfluous element inside of every single column.
 
 ```html
 <div class="container">
-  <div class="my-background-color">
+  <div class="bg">
     <div class="row">
       <div class="col-4">...</div>
       <div class="col-4">...</div>
@@ -39,6 +31,29 @@ Don't want to use `:before` trickery? Wrap your row in a superfluous element and
     </div>
   </div>
 </div>
+```
+
+```css
+.bg {
+  background: tomato;
+}
+```
+
+### SCSS Usage
+\* If this gets any attention I'll match these to Bootstrap's mixins.
+
+```scss
+.custom-container {
+  @include container($max-width: 0, $padding: $grid-gutter-width);
+}
+
+.custom-row {
+  @include row();
+}
+
+.custom-column {
+  @include column(1, 2); // produces a column that takes up 1/2 its row
+}
 ```
 
 ### Why?
@@ -76,12 +91,16 @@ Here's a margin-based approach.
 
 ```html
 <div class="container">
-  <div class="row">
-    <div class="col-6">1</div>
-    <div class="col-6">
-      <div class="row">
-        <div class="col-6">1a</div>
-        <div class="col-6">1b</div>
+  <div class="bg">
+    <div class="row">
+      <div class="col-6">1</div>
+      <div class="col-6">
+        <div class="bg">
+          <div class="row">
+            <div class="col-6">1a</div>
+            <div class="col-6">1b</div>
+          </div>
+        </div>
       </div>
     </div>
   </div>
@@ -90,10 +109,9 @@ Here's a margin-based approach.
 
 https://youtu.be/ueZ6tvqhk8U?t=18
 
-### Why hasn't Bootstrap fixed this?
-Objectively margin-based grids are better, but the assumption is their userbase won't be able to figure out how to upgrade, or this "minor" upgrade isn't worth the fundamental change. And @mdo personally likes padding-based grids because they just make more sense to him.
+Less markup, better results, same markup scheme. There's no reason Bootstrap shouldn't switch over to margin grids.
 
-Try out this grid and when you realize it's Just Better™ pester the Bootstrap people (Issues, Tweets, etc.) into officially changing their grid (Foundation and such will follow the leader) or at least offering a real counter argument to it.
-
-### You seem salty?
-A little bit. I've had to work with Bootstrap and Foundation for many years on various projects. This always bugged me and I don't think the reasons not to change are good enough.
+### Caveats
+I haven't tested to see if this is a drop-in replacement to Bootstrap's grid system. In fact, I'm pretty sure it's not.
+If this project gets popular I'll match all this stuff to Bootstrap perfectly so you actually can drop-in replace
+(assuming Bootstrap isn't heavily coupled to their padding-based grid -- lemme know if it is).

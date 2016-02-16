@@ -1,0 +1,32 @@
+{
+  "name": "bootstrap-margin-grid",
+  "version": "0.0.1",
+  "description": "Bootstrap's grid with margins.",
+  "scripts": {
+    "dev": "node-sass --output-style expanded ./dist/bootstrap-margin-grid.scss > ./dist/bootstrap-margin-grid.css && node-sass --output-style expanded -w ./dist/bootstrap-margin-grid.scss -o ./dist",
+    "build": "npm-run-all build:**",
+    "build:trash": "trash ./dist/bootstrap-margin-grid.css ./dist/bootstrap-margin-grid.min.css",
+    "build:sass": "node-sass --output-style expanded ./dist/bootstrap-margin-grid.scss > ./dist/bootstrap-margin-grid.css",
+    "build:minify": "node-sass --output-style compressed ./dist/bootstrap-margin-grid.scss > ./dist/bootstrap-margin-grid.min.css"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/corysimmons/bootstrap-margin-grid.git"
+  },
+  "keywords": [
+    "bootstrap",
+    "grid",
+    "margin"
+  ],
+  "author": "Cory Simmons",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/corysimmons/bootstrap-margin-grid/issues"
+  },
+  "homepage": "https://github.com/corysimmons/bootstrap-margin-grid#readme",
+  "devDependencies": {
+    "node-sass": "^3.4.2",
+    "npm-run-all": "^1.5.1",
+    "trash-cli": "^1.2.0"
+  }
+}
