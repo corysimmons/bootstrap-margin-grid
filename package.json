@@ -25,8 +25,8 @@
   },
   "homepage": "https://github.com/corysimmons/bootstrap-margin-grid#readme",
   "devDependencies": {
-    "node-sass": "^3.4.2",
-    "npm-run-all": "^1.5.1",
+    "node-sass": "^4.7.2",
+    "npm-run-all": "^4.1.2",
     "trash-cli": "^1.2.0"
   }
 }
