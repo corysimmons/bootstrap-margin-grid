@@ -1,5 +1,7 @@
 # Bootstrap Margin Grid
 
+[![Greenkeeper badge](https://badges.greenkeeper.io/corysimmons/bootstrap-margin-grid.svg)](https://greenkeeper.io/)
+
 ### Installation
 - Add `bootstrap-margin-grid.css` to your project and use classes.
 - Or add `bootstrap-margin-grid.scss` to your project and generate columns based on simple fractions on-the-fly.
